@@ -1,4 +1,6 @@
 import React from "react" 
+import {useDispatch, useSelector} from 'react-redux';
+import * as actions from "../../store/actions"
 import clsx from  "clsx"
 import { makeStyles } from '@material-ui/core/styles';
 import {AppBar, Toolbar, IconButton, Typography} from "@material-ui/core"
@@ -46,22 +48,23 @@ const useStyles = makeStyles(theme => ({
   }));
 
 const Header = () => {
-
-    const [open, setOpen] = React.useState(true);
+  const dispatch = useDispatch();
+  const { navbarOpen } =  useSelector( state => state.ui);
+    
     const handleDrawerOpen = () => {
-      setOpen(true);
+      dispatch(actions.handleNavbarStatus(true))
     };
     const classes = useStyles();
 
     return (
-        <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+        <AppBar position="absolute" className={clsx(classes.appBar, navbarOpen && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
-            className={`${classes.menuButton} ${open && classes.menuButtonHidden}`}
+            className={`${classes.menuButton} ${navbarOpen && classes.menuButtonHidden}`}
           >
             <MenuIcon />
           </IconButton>
