@@ -1,20 +1,38 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { isAuthenticated } from "./services/auth";
-import {Login, Dashboard } from "./pages"
+import { Login, Dashboard } from "./pages"
+import { Header, Navbar, Footer } from "./components"
+import { makeStyles } from '@material-ui/core/styles';
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      isAuthenticated() ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to={{ pathname: "/", state: { from: props.location } }} />
-      )
-    }
-  />
-);
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+  },
+}))
+
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  const classes = useStyles()
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        isAuthenticated() ? (
+          <>
+            <div className={classes.root}>
+              <Header />
+              <Navbar />
+              <Component {...props} />
+            </div>
+            <Footer />
+          </>
+        ) : (
+            <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+          )
+      }
+    />
+  )
+}
 
 const Routes = () => (
   <BrowserRouter>

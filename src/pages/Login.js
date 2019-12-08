@@ -65,7 +65,7 @@ const Login = ({history}) => {
     } else {
       try {
        const verifyCredentials = await loginUtil.checkCredentials(localLogin);
-       verifyCredentials ? history.push("/app") : dispatch(actions.showTopCenterMsg("error", "Verify your credencials and try again"))
+       verifyCredentials ? history.push("/app") : dispatch(actions.showTopCenterMsg("error", "Invalid credentials. Verify your information and try again"))
       } catch (err) {
         dispatch(actions.showTopCenterMsg("error", err))
       }
@@ -109,16 +109,15 @@ const Login = ({history}) => {
             />
 
             <Button
-              type="button"
+              type="submit"
               fullWidth
               variant="contained"
               color="primary"
               onClick={(e) => handleSignIn(e)}  
               className={classes.submit}
-            >
+              disabled={!localLogin.email || !localLogin.password}>
               Sign In
             </Button>
-
             <Box mt={5}>
               <Copyright />
             </Box>
