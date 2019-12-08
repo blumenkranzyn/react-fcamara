@@ -3,8 +3,7 @@ import {useDispatch} from "react-redux"
 import {Avatar, Button, TextField, Link, Paper, Box, Grid, Typography} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
-import api from "../services/api";
-import { login } from "../services/auth";
+import * as loginUtil from "../utils/LoginUtil"
 import * as actions from "../store/actions";
 
 function Copyright() {
@@ -56,22 +55,19 @@ const Login = ({history}) => {
   const classes = useStyles();
   const [localLogin, setLocalLogin] = useState({
     email: "",
-    password: "",
-    error: ""
+    password: ""
   })
 
   const handleSignIn = async e => {
     e.preventDefault();
-
     if (!localLogin.email || !localLogin.password) {
       dispatch(actions.showTopCenterMsg("error", "Fill the form to continue!"))
     } else {
       try {
-        const response = await api.post("/sessions", localLogin);
-        login(response.data.token);
-        history.push("/app");
+       const verifyCredentials = await loginUtil.checkCredentials(localLogin);
+       verifyCredentials ? history.push("/app") : dispatch(actions.showTopCenterMsg("error", "Verify your credencials and try again"))
       } catch (err) {
-        dispatch(actions.showTopCenterMsg("error", "Verify your credencials and try again"))
+        dispatch(actions.showTopCenterMsg("error", err))
       }
     }
   };
