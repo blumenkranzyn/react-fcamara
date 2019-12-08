@@ -1,0 +1,21 @@
+{
+  "sessions": [
+    {
+      "id": 1321,
+      "email": "admin@dev.com.br",
+      "password": "admin123"
+    },
+    {
+      "email": "admin@dev.com.br",
+      "password": "admin123",
+      "error": "",
+      "id": 1322
+    },
+    {
+      "email": "wdqwdqwdqwdwqd",
+      "password": "wqdqwdqwdqwd",
+      "error": "",
+      "id": 1323
+    }
+  ]
+}
