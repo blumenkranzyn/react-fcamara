@@ -9,13 +9,14 @@ const PageHeaderSimple = ({ breadcrumbItems, icon, titlePage, buttonLabel, butto
 
     return (
         <>
-
-            <div className="w-full h-34 bg-gray-800 p-4">
+       
+            
+        <div className="w-full p-4">
                 <div className="flex flex-1 w-full items-center justify-between">
 
                     <div className="flex items-center">
                         <Fade delay={300} left>
-                            <Typography className="hidden sm:flex" variant="h6">{titlePage}</Typography>
+                            <Typography className="hidden text-white sm:flex" variant="h6">{titlePage}</Typography>
                         </Fade>
                     </div>
 
@@ -45,6 +46,8 @@ const PageHeaderSimple = ({ breadcrumbItems, icon, titlePage, buttonLabel, butto
                 </div>
 
             </div>
+       
+     
         </>
     )
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import {withRouter} from "react-router-dom"
+import { withRouter } from "react-router-dom"
 import { connect } from 'react-redux';
 import { Hidden, Grid, Typography, Breadcrumbs, Link, } from "@material-ui/core";
 import { withStyles } from '@material-ui/core/styles';
@@ -14,7 +14,7 @@ const styles = theme => ({
     },
     link: {
         display: 'flex',
-        color: "white"
+        color: "white !important"
     },
 });
 
@@ -22,18 +22,9 @@ const PageBreadcrumbs = ({ items, classes, history, ...other }) => {
     const breadcrumbItems = items.map((item, index) => {
         return (
             <>
-
-                {items.length === index + 1 ? (
-                    <Typography
-                        className={classes.link}>
-                        {item.name}
-                    </Typography>
-                ) : (
-                        <Link href="#!" {...other} className={classes.link}>
-                            {item.name}
-                        </Link>
-                    )}
-
+                <Link href="#!" {...other} className={classes.link} key={index}>
+                    {item.name}
+                </Link>
             </>
         )
     });
@@ -42,12 +33,12 @@ const PageBreadcrumbs = ({ items, classes, history, ...other }) => {
         <>
             <Fade delay={200} right>
                 <Grid item xs={12} sm={12} >
-                    <Hidden mdDown>
+                    <Hidden smDown>
                         <Breadcrumbs aria-label="breadcrumb" className={"text-white mr-6"} style={{ float: "right" }}>
                             <Link href="#!" onClick={() => { history.push("/app"); }} className={classes.link}>
                                 <Home className={classes.icon} />
                                 Home
-                         </Link>
+                            </Link>
                             {breadcrumbItems}
                         </Breadcrumbs>
                     </Hidden>
