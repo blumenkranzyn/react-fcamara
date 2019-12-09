@@ -5,6 +5,7 @@ import { Login, Dashboard, Classes, ClassSchedule, Students, Subjects, Teachers 
 import { Header, Navbar, Footer } from "./components"
 import { makeStyles } from '@material-ui/core/styles';
 
+
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
@@ -12,6 +13,7 @@ const useStyles = makeStyles(theme => ({
     overflow: "hidden"
   },
   content: {
+    width: "100%",
     position:"relative",
     paddingTop:70,
     paddingLeft: 22
@@ -19,6 +21,8 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
+
+
   const classes = useStyles()
   return (
     <Route
@@ -26,6 +30,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       render={props =>
         isAuthenticated() ? (
           <>
+           
             <div className={classes.root}>
               <Header />
               <Navbar />

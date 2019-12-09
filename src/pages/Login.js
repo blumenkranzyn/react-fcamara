@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector } from "react-redux"
 import {Avatar, Button, TextField, Link, Paper, Box, Grid, Typography} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 import * as loginUtil from "../utils/LoginUtil"
 import * as actions from "../store/actions";
+
 
 function Copyright() {
   return (
@@ -59,6 +60,7 @@ const Login = ({history}) => {
   })
 
   const handleSignIn = async e => {
+    dispatch(actions.handleLoadingStatus(true))
     e.preventDefault();
     if (!localLogin.email || !localLogin.password) {
       dispatch(actions.showTopCenterMsg("error", "Fill the form to continue!"))
@@ -66,13 +68,17 @@ const Login = ({history}) => {
       try {
        const verifyCredentials = await loginUtil.checkCredentials(localLogin);
        verifyCredentials ? history.push("/app") : dispatch(actions.showTopCenterMsg("error", "Invalid credentials. Verify your information and try again"))
+       dispatch(actions.handleLoadingStatus(false))
       } catch (err) {
         dispatch(actions.showTopCenterMsg("error", err))
+        dispatch(actions.handleLoadingStatus(false))
       }
     }
   };
 
   return (
+    <>
+   
     <Grid container component="main" className={classes.root}>
      
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
@@ -125,6 +131,7 @@ const Login = ({history}) => {
         </div>
       </Grid>
     </Grid>
+  </>
   );
 }
 

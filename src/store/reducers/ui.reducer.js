@@ -1,7 +1,8 @@
 import * as Actions from "../actions"
 
 const initialState = {
-    navbarOpen: true
+    navbarOpen: true,
+    loading: false
 }
 
 const uiReducer = (state = initialState, action) => {
@@ -11,6 +12,11 @@ const uiReducer = (state = initialState, action) => {
             return {
                 ...state,
                 navbarOpen: action.payload
+            }
+        case Actions.LOADING_STATUS:
+            return {
+                ...state,
+                loading: action.payload
             }
         default:
             return state
