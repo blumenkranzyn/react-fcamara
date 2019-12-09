@@ -1,17 +1,15 @@
 import React from "react"
+import {PageHeaderSimple} from '../components'
 //import {useSelector} from "react-redux"
 
 const Classes = () => {
  // const { classes } = useSelector(state => state.classReducer);
 
     return (
-        <div style={{ paddingTop: '10px' }}>
-        <input type='text' />
-        <button>
-          Click me!
-        </button>
-        <h1>teste</h1>
-      </div>
+      <>
+        <PageHeaderSimple breadcrumbItems={[{name: "Classes"}]} titlePage={"Manage Classes"} />
+        
+      </>
     )
 }
 

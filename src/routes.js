@@ -16,7 +16,9 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     position:"relative",
     paddingTop:70,
-    paddingLeft: 22
+    paddingLeft: 22,
+    paddingRight: 22,
+    paddingBottom: 30
   }
 }))
 
