@@ -1,7 +1,7 @@
 import React from "react"
 //import {useSelector} from "react-redux"
 
-const Home = () => {
+const Classes = () => {
  // const { classes } = useSelector(state => state.classReducer);
 
     return (
@@ -15,4 +15,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Classes

@@ -4,13 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as actions from "../../store/actions"
 import { Drawer, IconButton, Divider, List } from "@material-ui/core";
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { mainListItems, secondaryListItems } from './listItems';
 import { makeStyles } from '@material-ui/core/styles';
+import { withRouter } from 'react-router-dom';
+import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { Dashboard, Class, Schedule, PeopleAlt, MenuBook, CastForEducation } from '@material-ui/icons';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
   drawerPaper: {
+    height: "100vh", 
     position: 'relative',
     whiteSpace: 'nowrap',
     width: drawerWidth,
@@ -39,7 +42,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Navbar = () => {
+const Navbar = ({history}) => {
+  
   const dispatch = useDispatch();
   const { navbarOpen } = useSelector(state => state.ui);
   const classes = useStyles();
@@ -60,10 +64,48 @@ const Navbar = () => {
         </IconButton>
       </div>
       <Divider />
-      <List>{mainListItems}</List>
-      <Divider />
-      <List>{secondaryListItems}</List>
+      <List>
+        <div>
+          <ListItem button onClick={() => history.push("/app")} >
+            <ListItemIcon>
+              <Dashboard />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItem>
+          <ListItem button onClick={() => history.push("/classes")}>
+            <ListItemIcon>
+              <Class />
+            </ListItemIcon>
+            <ListItemText primary="Classes" />
+          </ListItem>
+          <ListItem button onClick={() => history.push("/class-schedule")}>
+            <ListItemIcon>
+              <Schedule />
+            </ListItemIcon>
+            <ListItemText primary="Class Schedule" />
+          </ListItem>
+          <ListItem button onClick={() => history.push("/students")}>
+            <ListItemIcon>
+              <PeopleAlt />
+            </ListItemIcon>
+            <ListItemText primary="Students" />
+          </ListItem>
+          <ListItem button onClick={() => history.push("/subjects")}>
+            <ListItemIcon>
+              <MenuBook />
+            </ListItemIcon>
+            <ListItemText primary="Subjects" />
+          </ListItem>
+          <ListItem button onClick={() => history.push("/teachers")}>
+            <ListItemIcon>
+              <CastForEducation />
+            </ListItemIcon>
+            <ListItemText primary="Teachers" />
+          </ListItem>
+        </div>
+
+      </List>
     </Drawer>
   )
 }
-export default Navbar
+export default withRouter(Navbar)

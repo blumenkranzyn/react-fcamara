@@ -5,8 +5,6 @@ import {Container, Grid, Paper} from '@material-ui/core';
 
 
 const useStyles = makeStyles(theme => ({
-
-
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
@@ -14,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     overflow: 'auto',
   },
   container: {
-    paddingTop: theme.spacing(4),
+    
     paddingBottom: theme.spacing(4),
   },
   paper: {
