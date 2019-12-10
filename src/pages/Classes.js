@@ -1,5 +1,5 @@
 import React from "react"
-import {PageHeaderSimple, PageCarded} from '../components'
+import {PageHeaderSimple, PageCarded, ClassesTable} from '../components'
 
 //import {useSelector} from "react-redux"
 
@@ -13,12 +13,13 @@ const Classes = () => {
                     header: "h-56"
                 }}
                 header={
-                  <PageHeaderSimple breadcrumbItems={[{name: "Classes"}]} titlePage={"Manage Classes"} />
+                  <PageHeaderSimple breadcrumbItems={[{name: "Classes"}]} 
+                  />
                 }
                 content={
                     <>
-                        <div className="p-24">
-                            
+                        <div className="p-2">
+                            <ClassesTable />
                         </div>
                     </>
                 }

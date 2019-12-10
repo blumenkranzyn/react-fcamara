@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom"
 import { connect } from 'react-redux';
-import { Hidden, Grid, Typography, Breadcrumbs, Link, } from "@material-ui/core";
+import { Hidden, Grid, Breadcrumbs, Link, } from "@material-ui/core";
 import { withStyles } from '@material-ui/core/styles';
 import { Home } from "@material-ui/icons";
 import { Fade } from 'react-reveal';

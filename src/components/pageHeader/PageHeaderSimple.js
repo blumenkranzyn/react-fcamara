@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Icon, Typography } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import { Link } from "react-router-dom"
 import PageBreadcrumbs from "./PageBreadcrumbs";
 import { Fade } from 'react-reveal';
@@ -13,12 +13,13 @@ const PageHeaderSimple = ({ breadcrumbItems, icon, titlePage, buttonLabel, butto
             
         <div className="w-full p-4">
                 <div className="flex flex-1 w-full items-center justify-between">
-
-                    <div className="flex items-center">
-                        <Fade delay={300} left>
-                            <Typography className="hidden text-white sm:flex" variant="h6">{titlePage}</Typography>
-                        </Fade>
-                    </div>
+                    {titlePage && (
+                        <div className="flex items-center">
+                            <Fade delay={300} left>
+                                <Typography className="hidden text-white sm:flex" variant="h6">{titlePage}</Typography>
+                            </Fade>
+                        </div>
+                    )}
 
 
                     {buttonType && buttonType.toUpperCase() === "HANDLEMODAL" ? (

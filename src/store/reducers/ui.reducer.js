@@ -2,7 +2,13 @@ import * as Actions from "../actions"
 
 const initialState = {
     navbarOpen: true,
-    loading: false
+    loading: false,
+    dialog: {
+        state: false,
+        options: {
+            children: 'Hi'
+        }
+    }
 }
 
 const uiReducer = (state = initialState, action) => {
@@ -17,6 +23,32 @@ const uiReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: action.payload
+            }
+        case Actions.OPEN_DIALOG:
+            {
+                return {
+                    ...state,
+                    dialog: {
+                        state: true,
+                        options: {
+                            ...state.options,
+                            ...action.options
+                        }
+                    }
+                };
+            }
+        case Actions.CLOSE_DIALOG:
+            {
+                return {
+                    ...state,
+                    dialog: {
+                        state: false,
+                        options: {
+                            ...state.options,
+                            ...action.options
+                        }
+                    }
+                };
             }
         default:
             return state
