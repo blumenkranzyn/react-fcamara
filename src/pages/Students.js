@@ -13,8 +13,7 @@ const Students = () => {
                     header: "h-56"
                 }}
                 header={
-                    <PageHeaderSimple breadcrumbItems={[{ name: "Students" }]}
-                    />
+                    <PageHeaderSimple breadcrumbItems={[{ name: "Students" }]} titlePage="Manage Students" />
                 }
                 content={
                     <>

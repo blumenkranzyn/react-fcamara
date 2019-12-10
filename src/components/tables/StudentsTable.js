@@ -25,10 +25,9 @@ const StudentsTable = () => {
 
     useEffect(() => {
         getStudents()
-        students && (
-            dispatch(actions.handleLoadingStatus(false))
-        )
-    }, [students])
+        dispatch(actions.handleLoadingStatus(false))
+    }, []);
+
 
 
 

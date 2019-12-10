@@ -1,61 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import { fade } from '@material-ui/core/styles/colorManipulator';
-import { Grid, Divider, Typography, Fab } from "@material-ui/core";
-import { DoneAll } from "@material-ui/icons";
+import { useDispatch } from "react-redux"
+import { Grid, Divider, Typography, Button, TextField } from "@material-ui/core";
+import { DoneAll, Close } from "@material-ui/icons";
 import { DialogActions, DialogContent, DialogContentText } from "@material-ui/core"
+import { makeStyles } from '@material-ui/core/styles';
+import { NumberFormatCustom } from "../../components"
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker, } from '@material-ui/pickers';
+import * as dateUtil from "../../utils/DateUtil"
+import StudentsApi from "../../api/StudentsApi"
+import * as actions from "../../store/actions";
 import "./overwrite.css"
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
-        margin: 0,
-        padding: theme.spacing(2)
+        '& > *': {
+            margin: theme.spacing(1),
+        },
     },
-    closeButton: {
-        position: "absolute",
-        right: theme.spacing(1),
-        top: theme.spacing(1),
-        color: theme.palette.grey[500]
-    },
-    AppBar: {
-        minHeight: "40px"
-    },
-    board: {
-        cursor: 'pointer',
-        boxShadow: theme.shadows[0],
-        transitionProperty: 'box-shadow border-color',
-        transitionDuration: theme.transitions.duration.short,
-        transitionTimingFunction: theme.transitions.easing.easeInOut,
-        background: theme.palette.primary.dark,
-        color: theme.palette.getContrastText(theme.palette.primary.dark),
-        '&:hover': {
-            boxShadow: theme.shadows[14],
-            textDecoration: "none"
-        }
-    },
-    newBoard: {
-        borderWidth: 2,
-        borderStyle: 'dashed',
-        borderColor: fade(theme.palette.getContrastText(theme.palette.primary.main), 0.6),
-        '&:hover': {
-            borderColor: fade(theme.palette.getContrastText(theme.palette.primary.main), 0.8)
-        }
-    },
-    scrollDiv: {
-        height: "120px",
-        overflowY: "scroll"
-    }
-});
+}));
 
-const EditStudent = withStyles(styles)(props => {
-    const { closeDialog } = props;
-
-    const [localStudent] = useState({
+const NewStudent = ({ closeDialog, refCustomTable, getStudents }) => {
+    const dispatch = useDispatch()
+    const classes = useStyles()
+    const today = new Date().getTime()
+    const [localStudent, setLocalStudent] = useState({
         id: "",
         fullname: "",
         email: "",
         federalId: "",
-        birthdayDate: "",
+        birthdayDate: today,
         phoneNumber: "",
     });
 
@@ -63,42 +38,122 @@ const EditStudent = withStyles(styles)(props => {
         console.log("mudou", localStudent)
     }, [localStudent])
 
+    const handleAdd = () => {
+        dispatch(actions.handleLoadingStatus(true))
+        new StudentsApi().newStudent(localStudent).then(resp => {
+            console.log("update Partner resp: ", resp);
+            dispatch(actions.handleLoadingStatus(false))
+            closeDialog();
+            dispatch(actions.showTopCenterMsg("success", "Partner  successfully added!"))
+            refCustomTable.current.onQueryChange(getStudents())
+            closeDialog();
+        })
+            .catch(err => {
+                dispatch(actions.handleLoadingStatus(false))
+                console.log(">>>> Erro ao cadastrar", err);
+            });
+    };
+
     return (
         <>
             <DialogContent >
                 <DialogContentText>
-                    <Typography variant="h6" color="primary" className={"uppercase font-700 text-center mb-8 mt-24 "}>Edit Student</Typography>
+                    <Typography variant="h6" color="primary" className={"uppercase font-700 text-center mb-8 mt-24 "}>Create new Student</Typography>
                 </DialogContentText>
                 <Divider />
-                <div className={"p-5 w-full"}><h2>oi</h2></div>
+                <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
+                    <Grid item xs={12}>
+                        <TextField
+                            fullWidth
+                            variant="outlined"
+                            defaultValue={localStudent.fullname}
+                            label="Full Name"
+                            onChange={e =>
+                                setLocalStudent({ ...localStudent, fullname: e.target.value })
+                            }
+                        />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <TextField
+                            fullWidth
+                            variant="outlined"
+                            defaultValue={localStudent.email}
+                            label="Email"
+                            onChange={e =>
+                                setLocalStudent({ ...localStudent, email: e.target.value })
+                            }
+                        />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <NumberFormatCustom
+                            fullWidth
+                            variant="outlined"
+                            label="Federal Id"
+                            format={"###.###.###-##"}
+                            mask="_"
+                            defaultValue={localStudent.federalId}
+                            onBlur={e =>
+                                setLocalStudent({ ...localStudent, federalId: e.target.value })
+                            }
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <KeyboardDatePicker
+                                fullWidth
+                                inputVariant="outlined"
+                                format="dd/MM/yyyy"
+                                margin="normal"
+                                id="date-picker-inline"
+                                label="Birthday Date"
+                                value={localStudent.birthdayDate}
+                                onChange={e =>
+                                    setLocalStudent({ ...localStudent, birthdayDate: dateUtil.formatDate(e) })
+                                }
+                                KeyboardButtonProps={{
+                                    'aria-label': 'change date',
+                                }}
+                            />
+                        </MuiPickersUtilsProvider>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <NumberFormatCustom
+                            fullWidth
+                            variant="outlined"
+                            label="Phone Number"
+                            format={"(##) #####-####"}
+                            mask="_"
+                            defaultValue={localStudent.phoneNumber}
+                            onBlur={e =>
+                                setLocalStudent({ ...localStudent, phoneNumber: e.target.value })
+                            }
+                        />
+                    </Grid>
+
+                </Grid>
+
             </DialogContent>
             <DialogActions>
                 <Grid container direction="row" justify="center" alignItems="center" >
                     <Grid item xs={12} style={{ textAlign: "center" }} className={"p-5"}>
-                        <Fab
-                            variant="extended"
-                            size="medium"
-                            color="primary"
-                            aria-label="add"
-                            onClick={() => console.log("aksdhjgaj")} >
-                            <DoneAll className="mx-24" />
-                            Create New Student
-                        </Fab>
-                        <Fab
-                            variant="extended"
-                            size="medium"
-                            color="primary"
-                            aria-label="add"
-                            onClick={() => closeDialog()} >
-                            Cancel
-                        </Fab>
+                        <div className={classes.root}>
+                            <Button variant="contained" color="primary" className="mr-12" onClick={() => handleAdd()}>
+                                <DoneAll /> Add new
+                            </Button>
+                            <Button variant="contained" onClick={() => closeDialog()}>
+                                <Close />
+                                Cancel
+                        </Button>
+                        </div>
                     </Grid>
                 </Grid>
 
             </DialogActions>
         </>
     )
-})
+}
 
-export default withStyles(null, { withTheme: true })(EditStudent);
+export default withStyles(null, { withTheme: true })(NewStudent);
 

@@ -1,6 +1,7 @@
 import Message from "./message/Message"
-import Loading from "./Loading"
-import GlobalDialog from "./dialogs/GlobalDialog"
+import Loading from "./utils/Loading"
+import GlobalDialog from "./utils/GlobalDialog"
+import NumberFormatCustom from "./utils/NumberFormatCustom"
 
 import PageCarded from "./pageLayout/PageCarded"
 import PageHeaderSimple from "./pageHeader/PageHeaderSimple"
@@ -13,7 +14,7 @@ import ClassesTable from "./tables/ClassesTable"
 import StudentsTable from "./tables/StudentsTable"
 
 export {
-    Message, Loading, GlobalDialog,
+    Message, Loading, GlobalDialog, NumberFormatCustom,
     Footer, Navbar, Header,
     PageHeaderSimple, PageBreadcrumbs, PageCarded,
     ClassesTable, StudentsTable
