@@ -612,7 +612,7 @@ const ClassTable = () => {
         "dueDate": "24/12/2019"
     }]
 
-    const EditClass = (data, ref) => {
+    const EditClasses = (data, ref) => {
         dispatch(actions.openDialog({
             children: (
                 <EditClass closeDialog={() => dispatch(actions.closeDialog())} dataClass={data} refCustomTable={ref} />
@@ -624,7 +624,7 @@ const ClassTable = () => {
         <Grid item xs={12} className={"p-8"}>
             <Fade delay={400}>
                 <TableCustom
-                    config={ClassConfig((rowData) => EditClass(rowData, refCustomTable))}
+                    config={ClassConfig((rowData) => EditClasses(rowData, refCustomTable))}
                     data={data}
                     style={{ boxShadow: "0px 0px 2px 0px", borderRadius: 0 }}
                     showDateFilter={true}

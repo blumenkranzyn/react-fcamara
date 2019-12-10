@@ -10,20 +10,20 @@ const tableStyle = {
 };
 const options = {
 
-    pageSize: 20,
-    pageSizeOptions: [20, 50, 100, 200, 1000],
-    maxBodyHeight: "55vh",
+    pageSize: 15,
+    pageSizeOptions: [15, 50, 100, 200, 1000],
+    maxBodyHeight: "75vh",
     search: true
 };
 export function getColumns(changeStatusModal) {
     const columns = [
         {
-            title: "Description",
-            field: "description",
+            title: "Full Name",
+            field: "fullname",
             render: rowData => (
                 <>
                     <Link style={{ cursor: "pointer" }} color={"primary"} component={"p"} className={"font-800"} onClick={() => changeStatusModal(rowData)} >
-                        {rowData.description}
+                        {rowData.fullname}
                     </Link>
                 </>
             ),
@@ -35,8 +35,8 @@ export function getColumns(changeStatusModal) {
             }
         },
         {
-            title: "Cost Code",
-            field: "supplier",
+            title: "Email",
+            field: "email",
             cellStyle: {
                 ...tableStyle.cellStyle,
             },
@@ -45,8 +45,8 @@ export function getColumns(changeStatusModal) {
             }
         },
         {
-            title: "Supplier",
-            field: "supplier",
+            title: "Federal Id",
+            field: "federalId",
             cellStyle: {
                 ...tableStyle.cellStyle,
             },
@@ -55,8 +55,8 @@ export function getColumns(changeStatusModal) {
             }
         },
         {
-            title: "Project",
-            field: "project",
+            title: "Birthday Date",
+            field: "birthdayDate",
             cellStyle: {
                 ...tableStyle.cellStyle,
             },
@@ -65,10 +65,10 @@ export function getColumns(changeStatusModal) {
             }
         },
         {
-            title: "Amount",
-            field: "amount",
+            title: "phoneNumber",
+            field: "phoneNumber",
             render: rowData => (
-                rowData.amount ? rowData.amount : "-"
+                rowData.phoneNumber ? rowData.phoneNumber : "-"
             ),
             cellStyle: {
                 ...tableStyle.cellStyle,
@@ -77,17 +77,7 @@ export function getColumns(changeStatusModal) {
                 ...tableStyle.headerStyle,
             }
         },
-        {
-            title: "Due Date",
-            field: "dueDate",
-            //render: rowData => <>{rowData.dueDate ? unixtimestampToDate(rowData.dueDate * 1000) : "-"}</>,
-            cellStyle: {
-                ...tableStyle.cellStyle,
-            },
-            headerStyle: {
-                ...tableStyle.headerStyle,
-            }
-        },
+
 
     ];
     return columns
@@ -95,7 +85,7 @@ export function getColumns(changeStatusModal) {
 
 
 
-export function ClassConfig(statementModal) {
+export function StudentConfig(statementModal) {
     return {
         title: "",
         columns: getColumns(statementModal),

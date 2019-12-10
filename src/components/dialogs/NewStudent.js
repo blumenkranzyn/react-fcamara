@@ -47,19 +47,27 @@ const styles = theme => ({
     }
 });
 
-const EditClass = withStyles(styles)(props => {
-    const { closeDialog, dataPayable } = props;
-    const [localPayable] = useState(dataPayable);
+const EditStudent = withStyles(styles)(props => {
+    const { closeDialog } = props;
+
+    const [localStudent] = useState({
+        id: "",
+        fullname: "",
+        email: "",
+        federalId: "",
+        birthdayDate: "",
+        phoneNumber: "",
+    });
 
     useEffect(() => {
-        console.log("mudou", localPayable)
-    }, [localPayable])
+        console.log("mudou", localStudent)
+    }, [localStudent])
 
     return (
         <>
             <DialogContent >
                 <DialogContentText>
-                    <Typography variant="h6" color="primary" className={"uppercase font-700 text-center mb-8 mt-24 "}>Edit Payable</Typography>
+                    <Typography variant="h6" color="primary" className={"uppercase font-700 text-center mb-8 mt-24 "}>Edit Student</Typography>
                 </DialogContentText>
                 <Divider />
                 <div className={"p-5 w-full"}><h2>oi</h2></div>
@@ -74,7 +82,15 @@ const EditClass = withStyles(styles)(props => {
                             aria-label="add"
                             onClick={() => console.log("aksdhjgaj")} >
                             <DoneAll className="mx-24" />
-                            Update Payable
+                            Create New Student
+                        </Fab>
+                        <Fab
+                            variant="extended"
+                            size="medium"
+                            color="primary"
+                            aria-label="add"
+                            onClick={() => closeDialog()} >
+                            Cancel
                         </Fab>
                     </Grid>
                 </Grid>
@@ -84,5 +100,5 @@ const EditClass = withStyles(styles)(props => {
     )
 })
 
-export default withStyles(null, { withTheme: true })(EditClass);
+export default withStyles(null, { withTheme: true })(EditStudent);
 

@@ -47,7 +47,7 @@ const styles = theme => ({
     }
 });
 
-const EditClass = withStyles(styles)(props => {
+const EditStudent = withStyles(styles)(props => {
     const { closeDialog, dataPayable } = props;
     const [localPayable] = useState(dataPayable);
 
@@ -84,5 +84,5 @@ const EditClass = withStyles(styles)(props => {
     )
 })
 
-export default withStyles(null, { withTheme: true })(EditClass);
+export default withStyles(null, { withTheme: true })(EditStudent);
 

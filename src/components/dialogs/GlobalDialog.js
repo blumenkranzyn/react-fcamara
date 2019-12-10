@@ -1,13 +1,11 @@
 import React from 'react';
-import {Dialog} from '@material-ui/core';
-import {useDispatch, useSelector} from 'react-redux';
+import { Dialog } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
 import * as Actions from '../../store/actions';
 
-function FuseDialog(props)
-{
+const GlobalDialog = () => {
     const dispatch = useDispatch();
-    const state = useSelector(state => fuse.dialog.state);
-    const options = useSelector(({fuse}) => fuse.dialog.options);
+    const { state, options } = useSelector(state => state.ui.dialog);
 
     return (
         <Dialog
@@ -19,4 +17,4 @@ function FuseDialog(props)
     );
 }
 
-export default FuseDialog;
+export default GlobalDialog;

@@ -1,35 +1,34 @@
 import React from 'react';
-import {Snackbar, IconButton, Icon, SnackbarContent} from '@material-ui/core';
-import {green, amber, blue} from '@material-ui/core/colors';
-import {useDispatch, useSelector} from 'react-redux';
+import { Snackbar, IconButton, Icon, SnackbarContent } from '@material-ui/core';
+import { green, amber, blue } from '@material-ui/core/colors';
+import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 import * as Actions from '../../store/actions';
-import {makeStyles} from '@material-ui/styles';
+import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles(theme => ({
-    root   : {},
+    root: {},
     success: {
         backgroundColor: green[600],
-        color          : '#FFFFFF'
+        color: '#FFFFFF'
     },
-    error  : {
+    error: {
         backgroundColor: theme.palette.error.dark,
-        color          : theme.palette.getContrastText(theme.palette.error.dark)
+        color: theme.palette.getContrastText(theme.palette.error.dark)
     },
-    info   : {
+    info: {
         backgroundColor: blue[600],
-        color          : '#FFFFFF'
+        color: '#FFFFFF'
     },
     warning: {
         backgroundColor: amber[600],
-        color          : '#FFFFFF'
+        color: '#FFFFFF'
     }
 }));
 
-function Message(props)
-{
+function Message(props) {
     const dispatch = useDispatch();
-    const state = useSelector( state => state.message.state);
+    const state = useSelector(state => state.message.state);
     const options = useSelector(state => state.message.options);
 
     const classes = useStyles();
@@ -43,7 +42,7 @@ function Message(props)
                 root: classes.root
             }}
             ContentProps={{
-                variant        : 'body2',
+                variant: 'body2',
                 headlineMapping: {
                     body1: 'div',
                     body2: 'div'
@@ -54,7 +53,7 @@ function Message(props)
                 className={clsx(classes[options.variant])}
                 message={
                     <div className="flex items-center">
-                        {options.message}
+                        {options.message.toString()}
                     </div>
                 }
                 action={[

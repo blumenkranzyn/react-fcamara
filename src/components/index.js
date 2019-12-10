@@ -1,6 +1,6 @@
 import Message from "./message/Message"
 import Loading from "./Loading"
-import Dialog from "./dialogs/Dialog"
+import GlobalDialog from "./dialogs/GlobalDialog"
 
 import PageCarded from "./pageLayout/PageCarded"
 import PageHeaderSimple from "./pageHeader/PageHeaderSimple"
@@ -10,10 +10,11 @@ import Navbar from "./template/Navbar"
 import Footer from "./Footer"
 
 import ClassesTable from "./tables/ClassesTable"
+import StudentsTable from "./tables/StudentsTable"
 
-export { 
-    Message, Loading, Dialog,
+export {
+    Message, Loading, GlobalDialog,
     Footer, Navbar, Header,
     PageHeaderSimple, PageBreadcrumbs, PageCarded,
-    ClassesTable
+    ClassesTable, StudentsTable
 }

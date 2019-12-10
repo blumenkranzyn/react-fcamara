@@ -1,6 +1,5 @@
 import api from "../services/api";
 
-
 export const checkCredentials = async (credencials) => {
     try {
         const response = await api.get("/sessions")
