@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "@material-ui/core";
-
+import   * as dateUtil from "../../utils/DateUtil"
 
 const tableStyle = {
     cellStyle: {
@@ -12,18 +12,18 @@ const options = {
 
     pageSize: 15,
     pageSizeOptions: [15, 50, 100, 200, 1000],
-    maxBodyHeight: "75vh",
+    maxBodyHeight: "63vh",
     search: true
 };
 export function getColumns(changeStatusModal) {
     const columns = [
         {
             title: "Full Name",
-            field: "fullname",
+            field: "data.fullname",
             render: rowData => (
                 <>
                     <Link style={{ cursor: "pointer" }} color={"primary"} component={"p"} className={"font-800"} onClick={() => changeStatusModal(rowData)} >
-                        {rowData.fullname}
+                        {rowData.data.fullname}
                     </Link>
                 </>
             ),
@@ -36,7 +36,7 @@ export function getColumns(changeStatusModal) {
         },
         {
             title: "Email",
-            field: "email",
+            field: "data.email",
             cellStyle: {
                 ...tableStyle.cellStyle,
             },
@@ -46,7 +46,7 @@ export function getColumns(changeStatusModal) {
         },
         {
             title: "Federal Id",
-            field: "federalId",
+            field: "data.federalId",
             cellStyle: {
                 ...tableStyle.cellStyle,
             },
@@ -56,7 +56,10 @@ export function getColumns(changeStatusModal) {
         },
         {
             title: "Birthday Date",
-            field: "birthdayDate",
+            field: "data.birthdayDate",
+            render: rowData => (
+                rowData.data.birthdayDate ? dateUtil.formatDate(rowData.data.birthdayDate) : "-"
+            ),
             cellStyle: {
                 ...tableStyle.cellStyle,
             },
@@ -66,9 +69,9 @@ export function getColumns(changeStatusModal) {
         },
         {
             title: "phoneNumber",
-            field: "phoneNumber",
+            field: "data.phoneNumber",
             render: rowData => (
-                rowData.phoneNumber ? rowData.phoneNumber : "-"
+                rowData.data.phoneNumber ? rowData.data.phoneNumber : "-"
             ),
             cellStyle: {
                 ...tableStyle.cellStyle,

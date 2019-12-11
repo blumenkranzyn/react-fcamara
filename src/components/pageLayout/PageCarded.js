@@ -4,7 +4,7 @@ import * as PropTypes from 'prop-types';
 import PageCardedHeader from "./PageCardedHeader"
 
 const drawerWidth = 140;
-const headerHeight = 130;
+const headerHeight = 110;
 const toolbarHeight = 64;
 const headerContentHeight = headerHeight - toolbarHeight;
 

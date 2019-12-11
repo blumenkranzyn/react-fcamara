@@ -621,7 +621,7 @@ const ClassTable = () => {
     }
     return (
 
-        <Grid item xs={12} className={"p-8"}>
+        <Grid item xs={12} className={"p-4"}>
             <Fade delay={400}>
                 <TableCustom
                     config={ClassConfig((rowData) => EditClasses(rowData, refCustomTable))}

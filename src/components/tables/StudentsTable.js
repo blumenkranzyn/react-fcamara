@@ -5,7 +5,7 @@ import TableCustom from "./TableCustom";
 import { StudentConfig } from "./StudentConfig";
 import { Fade } from 'react-reveal';
 import * as actions from "../../store/actions";
-import { EditStudent, NewStudent } from "../dialogs";
+import { EditStudent, NewStudent, DeleteStudent } from "../dialogs";
 import StudentsApi from "../../api/StudentsApi"
 
 const StudentsTable = () => {
@@ -31,17 +31,24 @@ const StudentsTable = () => {
 
 
 
-    const EditStudent_ = (data, ref) => {
+    const EditStudent_ = (data) => {
         dispatch(actions.openDialog({
             children: (
-                <EditStudent closeDialog={() => dispatch(actions.closeDialog())} dataStudent={data} refCustomTable={ref} />
+                <EditStudent closeDialog={() => dispatch(actions.closeDialog())} dataStudent={data} />
             )
         }))
     }
-    const NewStudent_ = (ref) => {
+    const NewStudent_ = () => {
         dispatch(actions.openDialog({
             children: (
-                <NewStudent closeDialog={() => dispatch(actions.closeDialog())} refCustomTable={ref} getStudents={getStudents} />
+                <NewStudent closeDialog={() => dispatch(actions.closeDialog())}  />
+            )
+        }))
+    }
+    const DeleteStudent_ = (rowData) => {
+        dispatch(actions.openDialog({
+            children: (
+                <DeleteStudent closeDialog={() => dispatch(actions.closeDialog())} dataStudent={rowData} />
             )
         }))
     }
@@ -49,7 +56,7 @@ const StudentsTable = () => {
         <>
             {students ? (
 
-                <Grid item xs={12} className={"p-8"}>
+                <Grid item xs={12} className={"p-4"}>
                     <Fade delay={400}>
                         <TableCustom
                             actions={[
@@ -57,13 +64,18 @@ const StudentsTable = () => {
                                     icon: 'add',
                                     tooltip: 'Add Student',
                                     isFreeAction: true,
-                                    onClick: (event) => NewStudent_(refCustomTable)
-                                }
+                                    onClick: (event) => NewStudent_()
+                                },
+                                {
+                                    icon: 'delete',
+                                    tooltip: 'Delete Student',
+                                    onClick: (e, rowData) => DeleteStudent_(rowData)
+                                },
                             ]}
-                            config={StudentConfig((rowData) => EditStudent_(rowData, refCustomTable))}
-                            data={students}
+                            config={StudentConfig((rowData) => EditStudent_(rowData))}
+                            data={students.slice(0).reverse()}
                             style={{ boxShadow: "0px 0px 2px 0px", borderRadius: 0 }}
-                            showDateFilter={true}
+                            filtering={true}
                         />
                     </Fade>
                 </Grid>

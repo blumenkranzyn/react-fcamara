@@ -26,7 +26,6 @@ const NewStudent = ({ closeDialog, refCustomTable, getStudents }) => {
     const classes = useStyles()
     const today = new Date().getTime()
     const [localStudent, setLocalStudent] = useState({
-        id: "",
         fullname: "",
         email: "",
         federalId: "",
@@ -34,19 +33,13 @@ const NewStudent = ({ closeDialog, refCustomTable, getStudents }) => {
         phoneNumber: "",
     });
 
-    useEffect(() => {
-        console.log("mudou", localStudent)
-    }, [localStudent])
-
     const handleAdd = () => {
         dispatch(actions.handleLoadingStatus(true))
         new StudentsApi().newStudent(localStudent).then(resp => {
-            console.log("update Partner resp: ", resp);
             dispatch(actions.handleLoadingStatus(false))
+            dispatch(actions.showTopCenterMsg("success", "Student successfully added!"))
             closeDialog();
-            dispatch(actions.showTopCenterMsg("success", "Partner  successfully added!"))
-            refCustomTable.current.onQueryChange(getStudents())
-            closeDialog();
+            document.location.reload(true);
         })
             .catch(err => {
                 dispatch(actions.handleLoadingStatus(false))

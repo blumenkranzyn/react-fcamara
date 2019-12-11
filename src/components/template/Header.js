@@ -12,6 +12,8 @@ const useStyles = makeStyles(theme => ({
     
     toolbar: {
       paddingRight: 24, // keep right padding when drawer closed
+      maxHeight: "36px",
+      minHeight: "36px"
     },
     toolbarIcon: {
       display: 'flex',

@@ -1,4 +1,5 @@
 import NewStudent from "./NewStudent"
 import EditStudent from "./EditStudent"
+import DeleteStudent from "./DeleteStudent"
 
-export { EditStudent, NewStudent }
+export { EditStudent, NewStudent, DeleteStudent }

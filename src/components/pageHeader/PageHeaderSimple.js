@@ -11,7 +11,7 @@ const PageHeaderSimple = ({ breadcrumbItems, icon, titlePage, buttonLabel, butto
         <>
        
             
-        <div className="w-full p-4">
+        <div className="w-full p-2">
                 <div className="flex flex-1 w-full items-center justify-between">
                     {titlePage && (
                         <div className="flex items-center">
