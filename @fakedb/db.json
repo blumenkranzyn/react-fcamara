@@ -28,17 +28,6 @@
         "birthdayDate": 1576017338502,
         "phoneNumber": "(56) 46546-5465"
       },
-      "id": 1
-    },
-    {
-      "data": {
-        "id": "",
-        "fullname": "Amanda",
-        "email": "amanda.natallie@hotmali.com",
-        "federalId": "122.114.486-54",
-        "birthdayDate": 1576017338502,
-        "phoneNumber": "(56) 46546-5465"
-      },
       "id": 2
     },
     {
@@ -232,7 +221,7 @@
       "data": {
         "id": 21,
         "fullname": "Guilherme",
-        "email": "Lourenço",
+        "email": "guil.lourenco@gmail.com",
         "federalId": "122.114.486-54",
         "birthdayDate": 1576017338502,
         "phoneNumber": "(56) 46546-5465"
