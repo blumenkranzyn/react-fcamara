@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux"
 import { Grid, Divider, Typography, Button, TextField } from "@material-ui/core";
@@ -7,7 +7,7 @@ import { DialogActions, DialogContent, DialogContentText } from "@material-ui/co
 import { makeStyles } from '@material-ui/core/styles';
 import { NumberFormatCustom } from "../../components"
 import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker, } from '@material-ui/pickers';
+import { MuiPickersUtilsProvider, KeyboardDatePicker, } from '@material-ui/pickers';
 import * as dateUtil from "../../utils/DateUtil"
 import StudentsApi from "../../api/StudentsApi"
 import * as actions from "../../store/actions";
@@ -24,7 +24,6 @@ const useStyles = makeStyles(theme => ({
 const EditStudent = ({ closeDialog, dataStudent }) => {
     const dispatch = useDispatch()
     const classes = useStyles()
-    const today = new Date().getTime()
     const [localStudent, setLocalStudent] = useState(dataStudent.data);
 
     const handleUpdate = () => {
@@ -33,7 +32,7 @@ const EditStudent = ({ closeDialog, dataStudent }) => {
             id: dataStudent.id
         }
         dispatch(actions.handleLoadingStatus(true))
-        new StudentsApi().editStudent(dataToUpdate).then(resp => {
+        new StudentsApi().editStudent(dataToUpdate).then(() => {
             dispatch(actions.handleLoadingStatus(false))
             dispatch(actions.showTopCenterMsg("success", "Student successfully updated!"))
             closeDialog();

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { Grid } from "@material-ui/core";
 import TableCustom from "./TableCustom";
@@ -9,7 +9,6 @@ import { EditStudent, NewStudent, DeleteStudent } from "../dialogs";
 import StudentsApi from "../../api/StudentsApi"
 
 const StudentsTable = () => {
-    const refCustomTable = useRef(null);
     const dispatch = useDispatch()
 
     const { students } = useSelector(state => state.students)

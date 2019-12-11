@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, {  } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux"
-import { Grid, Divider, Typography, Button, TextField } from "@material-ui/core";
+import { Grid, Typography, Button } from "@material-ui/core";
 import { DoneAll, Close } from "@material-ui/icons";
-import { DialogActions, DialogContent, DialogContentText } from "@material-ui/core"
+import { DialogActions, DialogContent } from "@material-ui/core"
 import { makeStyles } from '@material-ui/core/styles';
-import { NumberFormatCustom } from "../../components"
-import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker, } from '@material-ui/pickers';
-import * as dateUtil from "../../utils/DateUtil"
 import StudentsApi from "../../api/StudentsApi"
 import * as actions from "../../store/actions";
 import "./overwrite.css"
@@ -27,7 +23,7 @@ const DeleteStudent = ({ closeDialog, dataStudent }) => {
    
     const handleDelete = () => {
         dispatch(actions.handleLoadingStatus(true))
-        new StudentsApi().deleteStudent(dataStudent.id).then(resp => {
+        new StudentsApi().deleteStudent(dataStudent.id).then(() => {
             dispatch(actions.handleLoadingStatus(false))
             dispatch(actions.showTopCenterMsg("success", "Student successfully deeleted!"))
             closeDialog();

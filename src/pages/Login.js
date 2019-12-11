@@ -70,7 +70,7 @@ const Login = ({ history }) => {
         dispatch(actions.handleLoadingStatus(false))
         if (verifyCredentials) {
           login("@TokenMockup");
-          history.push("/app");
+          history.push("/students");
         }
         else {
           dispatch(actions.showTopCenterMsg("error", "Invalid credentials. Verify your information and try again"))

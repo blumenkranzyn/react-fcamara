@@ -48,18 +48,18 @@ const styles = theme => ({
 });
 
 const EditClass = withStyles(styles)(props => {
-    const { closeDialog, dataPayable } = props;
-    const [localPayable] = useState(dataPayable);
+    const {data } = props;
+    const [local] = useState(data);
 
     useEffect(() => {
-        console.log("mudou", localPayable)
-    }, [localPayable])
+        console.log("mudou", local)
+    }, [local])
 
     return (
         <>
             <DialogContent >
                 <DialogContentText>
-                    <Typography variant="h6" color="primary" className={"uppercase font-700 text-center mb-8 mt-24 "}>Edit Payable</Typography>
+                    <Typography variant="h6" color="primary" className={"uppercase font-700 text-center mb-8 mt-24 "}>Edit </Typography>
                 </DialogContentText>
                 <Divider />
                 <div className={"p-5 w-full"}><h2>oi</h2></div>
@@ -74,7 +74,7 @@ const EditClass = withStyles(styles)(props => {
                             aria-label="add"
                             onClick={() => console.log("aksdhjgaj")} >
                             <DoneAll className="mx-24" />
-                            Update Payable
+                            Update 
                         </Fab>
                     </Grid>
                 </Grid>
